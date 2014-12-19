@@ -95,6 +95,8 @@ public class MicroGridModel extends SimModelImpl implements Chartable {
 
 	// model parameters
 	private int numPVDevices = NUMPVDEVICES;
+	
+	private double chillerLowTemperatureThreshold = 1.0;
 
 	@Override
 	public String getName(){
@@ -180,6 +182,7 @@ public class MicroGridModel extends SimModelImpl implements Chartable {
 
 		// add building device with a chiller and pump
 		chillerDevice = new ChillerDevice();
+		chillerDevice.setPointLowThreshold = chillerLowTemperatureThreshold;
 		devices.add(chillerDevice);
 		powerDevices.add(chillerDevice);
 
@@ -327,7 +330,7 @@ public class MicroGridModel extends SimModelImpl implements Chartable {
 
 	@Override
 	public String[] getInitParam(){
-		String[] initParams = { "NumPVDevices" };
+		String[] initParams = { "NumPVDevices", "chillerLowTemperatureThreshold" };
 		return initParams;
 	}
 		
@@ -337,6 +340,14 @@ public class MicroGridModel extends SimModelImpl implements Chartable {
 
 	public void setNumPVDevices(int na){
 		numPVDevices = na;
+	}
+	
+	public double getChillerLowTemperatureThreshold(){
+		return chillerLowTemperatureThreshold;
+	}
+	
+	public void setChillerLowTemperatureThreshold(double chillerTempThres){
+		chillerLowTemperatureThreshold = chillerTempThres;
 	}
 
 	public static void main(String[] args) {

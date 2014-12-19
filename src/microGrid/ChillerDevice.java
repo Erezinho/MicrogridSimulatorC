@@ -28,6 +28,9 @@ public class ChillerDevice extends PowerDevice {
 
 	/** chiller set-point temperature in C deg*/
 	private double setPoint = 20;
+	
+	/** chiller set-point threshold temperature in C deg*/
+	public double setPointLowThreshold = 1.0;
 
 	/**
 	 * constructor
@@ -61,18 +64,36 @@ public class ChillerDevice extends PowerDevice {
 
 
 	/**
-	 * calc the current power consumption
+	 * calculate the current power consumption
 	 * power in a function of the number of active compressors
-	 * compressors are turned on as the difference between internal temp and set point is increased
+	 * Compressors are turned on as the difference between internal temperature and set point is increased
 	 * @param time the time to get power at
 	 * @return the power production/consumption at time 'time'
 	 */
 	protected double calcCurrentPower(double time) {
-		double Tin = buildingDevice.getCurrentInternalTemp(time); // building internal temp
-		double dT = Math.max(Tin - setPoint, 0); // temperature difference between set point temp and building temp, but don't get below zero
-		int numActiveCompressores = (int) Math.min(dT/0.6, numCompressors); // activate a compressor for each 0.6C deg difference
-		double P = maxPower/numCompressors * numActiveCompressores; // current power
-		return -P; // power used is negative
+		
+		// Building internal temperature
+		double Tin = buildingDevice.getCurrentInternalTemp(time); 
+		
+		// Check temperature difference between building and set point
+		double dT = 0.0;		
+		if ( Tin - setPoint > setPointLowThreshold )
+		{
+			dT = Tin - setPoint; 
+		}
+				
+		/*
+		 * double dT = Math.max(Tin - setPoint, 0); // temperature difference between set point temp and building temp, but don't get below zero
+		 */
+		
+		// Activate a compressor for each 0.6C degrees difference
+		int numActiveCompressores = (int) Math.min(dT/0.6, numCompressors);
+		
+		// Current power
+		double P = maxPower/numCompressors * numActiveCompressores;
+		
+		// Power used is negative
+		return -P; 
 	}
 
 
