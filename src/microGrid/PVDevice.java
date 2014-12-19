@@ -24,7 +24,7 @@ public class PVDevice extends PowerDevice {
 	 */
 	public PVDevice(double kw) {
 		super();
-		System.out.println("Created a PVDevice, reated at: " + kw + "KW");
+		MicroGridModel.debugPrintln("Created a PVDevice, reated at: " + kw + "KW");
 
 		id = ++numPVDevices; // set unique id
 		name = "PV-"+id; // set name
@@ -41,7 +41,7 @@ public class PVDevice extends PowerDevice {
 	 */
 	@Override
 	public void step(double time) {
-		System.out.println("PVDevice " + id + " step(), ts=" + time + ", production=" + interpoleteHourlyData(time));
+		MicroGridModel.debugPrintln("PVDevice " + id + " step(), ts=" + time + ", production=" + interpoleteHourlyData(time));
 	}
 
 

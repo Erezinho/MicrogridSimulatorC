@@ -54,7 +54,7 @@ public class PumpDevice extends PowerDevice {
 	 */
 	public PumpDevice() {
 		super();
-		System.out.println("Created a PumpDevice");
+		MicroGridModel.debugPrintln("Created a PumpDevice");
 
 		id = ++numPumpDevices; // set unique id
 		name = "Pump-"+id; // set name
@@ -72,7 +72,7 @@ public class PumpDevice extends PowerDevice {
 		if (drEventActive  && time > drEventEndTime)
 			drEventActive = false;
 
-		System.out.println("PumpDevice " + id + " step(), ts=" + time + ", P=" + getCurrentPower(time));
+		MicroGridModel.debugPrintln("PumpDevice " + id + " step(), ts=" + time + ", P=" + getCurrentPower(time));
 	}
 
 
@@ -122,7 +122,7 @@ public class PumpDevice extends PowerDevice {
 	
 	/**
 	 * implement Negotiator interface
-	 * actually, nothing to do for PV
+	 * actually, nothing to do for Pump
 	 * @param schedule the Schedule object 
 	 */
 	@Override

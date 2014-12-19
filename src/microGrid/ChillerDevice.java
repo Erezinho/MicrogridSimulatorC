@@ -34,7 +34,7 @@ public class ChillerDevice extends PowerDevice {
 	 */
 	public ChillerDevice() {
 		super();
-		System.out.println("Created a ChillerDevice");
+		MicroGridModel.debugPrintln("Created a ChillerDevice");
 
 		id = ++numChillerDevices; // set unique id
 		name = "Chiler-"+id; // set name
@@ -47,7 +47,7 @@ public class ChillerDevice extends PowerDevice {
 	 */
 	@Override
 	public void step(double time) {
-		System.out.println("ChillerDevice " + id + " step(), ts=" + time + ", P=" + getCurrentPower(time));
+		MicroGridModel.debugPrintln("ChillerDevice " + id + " step(), ts=" + time + ", P=" + getCurrentPower(time));
 	}
 
 
@@ -90,7 +90,7 @@ public class ChillerDevice extends PowerDevice {
 	
 	/**
 	 * implement Negotiator interface
-	 * actually, nothing to do for PV
+	 * actually, nothing to do for Chiller
 	 * @param schedule the Schedule object 
 	 */
 	@Override

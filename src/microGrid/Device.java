@@ -89,7 +89,7 @@ public class Device implements Chartable {
 	 * @param time the time (in hours from midnight) 
 	 */
 	public void step(double time) {
-		System.out.println("Device step()");
+		MicroGridModel.debugPrintln("Device step()");
 	}
 
 	

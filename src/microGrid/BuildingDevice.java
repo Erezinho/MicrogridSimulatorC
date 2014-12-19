@@ -25,7 +25,7 @@ public class BuildingDevice extends PowerDevice {
 	private ChillerDevice chillerDevice;
 
 	/** outside temperature */
-	private TempDevice tempDevice;
+	private TemperatureDevice tempDevice;
 
 	/** water pump */
 	private PumpDevice pumpDevice;
@@ -54,9 +54,9 @@ public class BuildingDevice extends PowerDevice {
 	 * constructor
 	 * @param pumpDevice 
 	 */
-	public BuildingDevice(TempDevice temp, ChillerDevice chiller, PumpDevice pump) {
+	public BuildingDevice(TemperatureDevice temp, ChillerDevice chiller, PumpDevice pump) {
 		super();
-		System.out.println("Created a BuildingDevice");
+		MicroGridModel.debugPrintln("Created a BuildingDevice");
 
 		id = ++numBuildingDevices; // set unique id
 		name = "Building-"+id; // set name
@@ -89,7 +89,7 @@ public class BuildingDevice extends PowerDevice {
 		if (drEventActive  && time > drEventEndTime)
 			drEventActive = false;
 
-		System.out.println("BuildingDevice " + id + " step(), ts=" + time + ", temp=" + t);
+		MicroGridModel.debugPrintln("BuildingDevice " + id + " step(), ts=" + time + ", temp=" + t);
 	}
 
 

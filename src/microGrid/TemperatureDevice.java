@@ -4,7 +4,7 @@ package microGrid;
  * an implementation of a virtual device to supply temperature data
  * @author shahar
  */
-public class TempDevice extends Device {
+public class TemperatureDevice extends Device {
 
 	/**	counter of temp devices, used to give distinct ID for devices */
 	private static int numTempDevices = 0;
@@ -18,9 +18,9 @@ public class TempDevice extends Device {
 	/**
 	 * constructor
 	 */
-	public TempDevice() {
+	public TemperatureDevice() {
 		super();
-		System.out.println("Created a TempDevice");
+		MicroGridModel.debugPrintln("Created a TemperatureDevice");
 
 		id = ++numTempDevices; // set unique id
 		name = "Temp-"+id; // set name
@@ -45,6 +45,6 @@ public class TempDevice extends Device {
 	 */
 	@Override
 	public void step(double time) {
-		System.out.println("TempDevice " + id + " step(), ts=" + time + ", temp=" + getCurrentTemperature(time));
+		MicroGridModel.debugPrintln("TempDevice " + id + " step(), ts=" + time + ", temp=" + getCurrentTemperature(time));
 	}
 }
